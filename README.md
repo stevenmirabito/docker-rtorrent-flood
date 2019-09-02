@@ -23,6 +23,8 @@ As many images from the time it was first made, this image follows the principle
 - **UID** : user id (default : 991)
 - **GID** : group id (defaut : 991)
 - **FLOOD_SECRET** : flood secret key (defaut : supersecret30charactersminimum) (CHANGE IT)
+- **XMLRPC_USER** : XMLRPC username (default: rtorrent)
+- **XMLRPC_PASSWORD** : XMLRPC password (default: supersecret) (CHANGE IT)
 - **WEBROOT** : context path (base_URI) (default : /)
 - **RTORRENT_SOCK** : true or false (default : true, if false rtorrent listens on 0.0.0.0:5000)
 - **PKG_CONFIG_PATH** : `/usr/local/lib/pkgconfig` (don't touch)
@@ -33,8 +35,9 @@ As many images from the time it was first made, this image follows the principle
 - Connect Flood UI to rTorrent through `Unix socket`. Enter `/tmp/rtorrent.sock` as rTorrent Socket. If SCGI is used, configure accordingly.
 
 ### Ports
-- **49184**
-- **3000** (use a reverse proxy)
+- **49184** - rTorrent peer traffic
+- **5000** - rTorrent XMLRPC
+- **3000** - Flood
 
 ### Tags
 - **latest** : latest versions of rTorrent/libtorrent/Flood.

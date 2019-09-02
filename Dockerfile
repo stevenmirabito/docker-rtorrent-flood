@@ -7,6 +7,8 @@ ARG BUILD_CORES
 
 ENV UID=991 GID=991 \
     FLOOD_SECRET=supersecret30charactersminimum \
+    XMLRPC_USER=rtorrent \
+    XMLRPC_PASSWORD=supersecret \
     WEBROOT=/ \
     DISABLE_AUTH=false \
     RTORRENT_SOCK=true \
@@ -32,6 +34,7 @@ RUN NB_CORES=${BUILD_CORES-`getconf _NPROCESSORS_CONF`} \
     binutils \
     linux-headers \
  && apk add \
+    apache2-utils \
     ca-certificates \
     curl \
     ncurses \
@@ -42,6 +45,7 @@ RUN NB_CORES=${BUILD_CORES-`getconf _NPROCESSORS_CONF`} \
     s6 \
     su-exec \
     python2 \
+    nginx \
     nodejs \
     npm \
     unrar@3.14 \
@@ -64,11 +68,13 @@ RUN NB_CORES=${BUILD_CORES-`getconf _NPROCESSORS_CONF`} \
 COPY rootfs /
 
 RUN chmod +x /usr/local/bin/* /etc/s6.d/*/* /etc/s6.d/.s6-svscan/* \
- && cd /usr/flood/ && npm run build
+  && ln -sf /dev/stdout /var/log/nginx/access.log \
+  && ln -sf /dev/stderr /var/log/nginx/error.log \
+  && cd /usr/flood/ && npm run build
 
 VOLUME /data /flood-db
 
-EXPOSE 3000 49184 49184/udp
+EXPOSE 3000 5000 49184 49184/udp
 
 LABEL description="BitTorrent client with WebUI front-end" \
       rtorrent="rTorrent BiTorrent client v$RTORRENT_VER" \

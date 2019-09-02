@@ -2,4 +2,4 @@
 export HOME="/home/torrent"
 export PWD="/home/torrent"
 cd /home/torrent
-exec rtorrent
+exec su-exec $UID:$GID rtorrent
