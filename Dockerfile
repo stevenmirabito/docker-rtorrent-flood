@@ -70,6 +70,7 @@ COPY rootfs /
 RUN chmod +x /usr/local/bin/* /etc/s6.d/*/* /etc/s6.d/.s6-svscan/* \
   && ln -sf /dev/stdout /var/log/nginx/access.log \
   && ln -sf /dev/stderr /var/log/nginx/error.log \
+  && sed -i 's/user nginx/user rtorrent rtorrent/' /etc/nginx/nginx.conf \
   && cd /usr/flood/ && npm run build
 
 VOLUME /data /flood-db
