@@ -1,5 +1,3 @@
 #!/bin/sh
-export HOME="/home/torrent"
-export PWD="/home/torrent"
 cd /home/torrent
-exec su-exec $UID:$GID rtorrent
+exec su-exec $UID:$GID rtorrent -n -o import=/home/torrent/.rtorrent.rc
