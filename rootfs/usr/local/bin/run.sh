@@ -6,7 +6,7 @@ mkdir -p /data/.session
 
 rm -f /data/.session/rtorrent.lock
 
-chown -R $UID:$GID /tmp /usr/flood/dist /flood-db /etc/s6.d
+chown -R $UID:$GID /data/torrents /data/.watch /data/.session /tmp /usr/flood/dist /flood-db /etc/s6.d
 htpasswd -c -b /etc/nginx/auth.htpasswd $XMLRPC_USER $XMLRPC_PASSWORD
 
 if [ ${RTORRENT_SOCK} = "false" ]; then
