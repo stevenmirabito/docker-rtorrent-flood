@@ -6,6 +6,7 @@ mkdir -p /data/.session
 
 rm -f /data/.session/rtorrent.lock
 
+chown $UID:$GID /var/lib/nginx /var/lib/nginx/tmp
 chown -R $UID:$GID /data/torrents /data/.watch /data/.session /tmp /usr/flood/dist /flood-db /etc/s6.d
 htpasswd -c -b /etc/nginx/auth.htpasswd $XMLRPC_USER $XMLRPC_PASSWORD
 addgroup -S -g $GID rtorrent
